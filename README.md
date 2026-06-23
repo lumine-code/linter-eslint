@@ -16,6 +16,13 @@ ESLint linter provider with bundled v8 and v10 support. Uses project-installed E
 
 To install `linter-eslint-redux` search for [linter-eslint-redux](https://web.pulsar-edit.dev/packages/linter-eslint-redux) in the Install pane of the Pulsar settings or run `ppm install linter-eslint-redux`. Alternatively, you can run `ppm install asiloisad/pulsar-linter-eslint-redux` to install a package directly from the GitHub repository.
 
+## Commands
+
+Commands available in `atom-workspace`:
+
+- `linter-eslint-redux:reload`: reset the ESLint engine cache and re-detect,
+- `linter-eslint-redux:lint-projects`: lint all files in the project.
+
 ## Plugins
 
 If your project uses TypeScript, React, or other plugins, install ESLint locally:
@@ -33,13 +40,6 @@ The bundled ESLint is minimal and intended for basic linting only (no plugins).
 3. **Silent skip**: If no ESLint config found (tried both versions), silently skips the project.
 
 **Caching:** ESLint resolution and config detection happen on first lint and are cached per project. Use `linter-eslint-redux:reload` to clear the cache and re-detect (e.g., after installing ESLint or adding a config file).
-
-## Commands
-
-Commands available in `atom-workspace`:
-
-- `linter-eslint-redux:reload`: reset the ESLint engine cache and re-detect,
-- `linter-eslint-redux:lint-projects`: lint all files in the project.
 
 ## Troubleshooting
 
