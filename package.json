@@ -1,60 +1,38 @@
 {
-  "name": "linter-eslint-redux",
-  "version": "2.0.0",
-  "license": "MIT",
+  "name": "linter-eslint",
+  "author": "lumine-code",
   "description": "ESLint linter provider with bundled v8 and v10 support",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+  "repository": "https://github.com/lumine-code/linter-eslint",
+  "bugs": {
+    "url": "https://github.com/lumine-code/linter-eslint/issues"
   },
   "keywords": [
     "javascript",
     "linter",
     "eslint"
   ],
+  "version": "3.0.0",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.100.0 <2.0.0"
+  },
   "main": "lib/main.js",
+  "scripts": {
+    "test": "cd ../lumine && npm run test:only -- ../linter-eslint/spec",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
   "activationHooks": [
     "language-javascript:grammar-used",
-    "language-babel:grammar-used",
     "language-typescript:grammar-used"
   ],
   "activationCommands": {
     "atom-workspace": [
-      "linter-eslint-redux:reload",
-      "linter-eslint-redux:lint-projects",
-      "linter-eslint-redux:lint-selected"
+      "linter-eslint:reload",
+      "linter-eslint:lint-projects",
+      "linter-eslint:lint-selected"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/asiloisad/pulsar-linter-eslint-redux.git"
-  },
-  "configSchema": {
-    "useBuiltin": {
-      "title": "Use Bundled ESLint",
-      "description": "Use bundled ESLint when project doesn't have ESLint installed. Auto-detects v8 or v10 based on config format.",
-      "type": "boolean",
-      "default": true,
-      "order": 1
-    },
-    "deleteOnOpen": {
-      "title": "Delete Project Lint on File Open",
-      "description": "Delete project-wide lint messages for a file when it is opened in the editor. Restart needed.",
-      "type": "boolean",
-      "default": true,
-      "order": 2
-    },
-    "debugMode": {
-      "title": "Debug Mode",
-      "description": "Log ESLint detection info to developer console.",
-      "type": "boolean",
-      "default": false,
-      "order": 99
-    }
-  },
-  "dependencies": {
-    "eslint8": "npm:eslint@^8.57.0",
-    "eslint10": "npm:eslint@^10.0.0",
-    "minimatch": "^10.2.5"
   },
   "consumedServices": {
     "linter-indie": {
@@ -79,5 +57,39 @@
         "2.0.0": "provideLinter"
       }
     }
+  },
+  "linter-package": true,
+  "configSchema": {
+    "useBuiltin": {
+      "title": "Use Bundled ESLint",
+      "description": "Use bundled ESLint when project doesn't have ESLint installed. Auto-detects v8 or v10 based on config format.",
+      "type": "boolean",
+      "default": true
+    },
+    "deleteOnOpen": {
+      "title": "Delete Project Lint on File Open",
+      "description": "Delete project-wide lint messages for a file when it is opened in the editor. Restart needed.",
+      "type": "boolean",
+      "default": true
+    },
+    "debugMode": {
+      "title": "Debug Mode",
+      "description": "Log ESLint detection info to developer console.",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "dependencies": {
+    "eslint8": "npm:eslint@^8.57.0",
+    "eslint10": "npm:eslint@^10.8.0",
+    "minimatch": "^10.2.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-n": "^18.2.2",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.6"
   }
 }

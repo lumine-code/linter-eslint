@@ -1,0 +1,17 @@
+{
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Linter ESLint",
+          "submenu": [
+            { "label": "Reload", "command": "linter-eslint:reload" },
+            { "label": "Lint Projects", "command": "linter-eslint:lint-projects" },
+            { "label": "Lint Selected", "command": "linter-eslint:lint-selected" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# linter-eslint-redux
+# linter-eslint
 
 ESLint linter provider with bundled v8 and v10 support. Uses project-installed ESLint when available, falls back to bundled version.
 
@@ -11,19 +11,21 @@ ESLint linter provider with bundled v8 and v10 support. Uses project-installed E
 - **Ignore support**: respects `.eslintignore` files.
 - **Precise highlighting**: token-level range highlighting for lint messages.
 - **Auto-fix**: supports fix suggestions from ESLint rules.
+- **Project scans**: lints whole projects or tree-view selections in a background task and reports results through the indie linter API.
 
 ## Installation
 
-To install `linter-eslint-redux` search for [linter-eslint-redux](https://web.pulsar-edit.dev/packages/linter-eslint-redux) in the Install pane of the Pulsar settings or run `ppm install linter-eslint-redux`. Alternatively, you can run `ppm install asiloisad/pulsar-linter-eslint-redux` to install a package directly from the GitHub repository.
+To install `linter-eslint` search for _linter-eslint_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/linter-eslint`.
 
 ## Commands
 
 Commands available in `atom-workspace`:
 
-- `linter-eslint-redux:reload`: reset the ESLint engine cache and re-detect,
-- `linter-eslint-redux:lint-projects`: lint all files in the project.
+- `linter-eslint:reload`: reset the ESLint engine cache and re-detect,
+- `linter-eslint:lint-projects`: lint all files in the project,
+- `linter-eslint:lint-selected`: lint selected tree-view files or folders.
 
-## Plugins
+## Usage
 
 If your project uses TypeScript, React, or other plugins, install ESLint locally:
 
@@ -33,45 +35,41 @@ npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
 
 The bundled ESLint is minimal and intended for basic linting only (no plugins).
 
-## How It Works
+How it works:
 
-1. **Project ESLint**: First checks for ESLint in your project's `node_modules/eslint`.
-2. **Bundled fallback**: If no project ESLint found, tries bundled v8, then v10.
-3. **Silent skip**: If no ESLint config found (tried both versions), silently skips the project.
+1. **Project ESLint**: first checks for ESLint in your project's `node_modules/eslint`.
+2. **Bundled fallback**: if no project ESLint found, tries bundled v8, then v10.
+3. **Silent skip**: if no ESLint config found (tried both versions), silently skips the project.
 
-**Caching:** ESLint resolution and config detection happen on first lint and are cached per project. Use `linter-eslint-redux:reload` to clear the cache and re-detect (e.g., after installing ESLint or adding a config file).
+**Caching:** ESLint resolution and config detection happen on first lint and are cached per project. Use `linter-eslint:reload` to clear the cache and re-detect (e.g., after installing ESLint or adding a config file).
 
-## Troubleshooting
-
-Enable **Debug Mode** in settings and open the developer console (View → Developer → Toggle Developer Tools).
+Troubleshooting: enable **Debug Mode** in settings and open the developer console (View → Developer → Toggle Developer Tools).
 
 **Project ESLint found:**
 
 ```
-[linter-eslint-redux] Project: C:\projects\my-app
-[linter-eslint-redux] Project ESLint found: v10.0.0
-[linter-eslint-redux] Path: C:\projects\my-app\node_modules\eslint
+[linter-eslint] Project: C:\projects\my-app
+[linter-eslint] Project ESLint found: v10.0.0
+[linter-eslint] Path: C:\projects\my-app\node_modules\eslint
 ```
 
 **Using bundled ESLint:**
 
 ```
-[linter-eslint-redux] Project: C:\projects\my-app
-[linter-eslint-redux] Project ESLint not found: No eslint in project node_modules
-[linter-eslint-redux] Using bundled ESLint: bundled-v8, v8.57.1
+[linter-eslint] Project: C:\projects\my-app
+[linter-eslint] Project ESLint not found: No eslint in project node_modules
+[linter-eslint] Using bundled ESLint: bundled-v8, v8.57.1
 ```
 
 **No config found:**
 
 ```
-[linter-eslint-redux] No ESLint config found (tried both v8 and v10), skipping project
+[linter-eslint] No ESLint config found (tried both v8 and v10), skipping project
 ```
 
-## Example Configs
+Example config for ESLint v8 (`.eslintrc.js`):
 
-**ESLint v8** (`.eslintrc.js`):
-
-```ka
+```js
 module.exports = {
   env: { browser: true, es2021: true, node: true },
   extends: "eslint:recommended",
@@ -80,7 +78,7 @@ module.exports = {
 };
 ```
 
-**ESLint v10** (`eslint.config.js`):
+Example config for ESLint v10 (`eslint.config.js`):
 
 ```js
 const js = require("@eslint/js");
@@ -97,6 +95,13 @@ module.exports = [
   },
 ];
 ```
+
+## Services
+
+- **linter** (`2.0.0`): provided to the linter package; exposes the ESLint file linter with its name, grammar scopes and `lint` function.
+- **linter-indie** (`2.0.0`): consumed to report project-wide scan results through an indie linter delegate.
+- **atom-ide-busy-signal** (`0.1.0`): consumed to show busy messages while ESLint engines load and project scans run.
+- **tree-view** (`^1.0.0`): consumed to resolve the selected files or folders for `linter-eslint:lint-selected`.
 
 ## Contributing
 
