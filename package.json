@@ -1,7 +1,7 @@
 {
   "name": "linter-eslint",
   "author": "lumine-code",
-  "description": "ESLint linter provider with bundled v8 and v10 support",
+  "description": "ESLint linter provider with bundled v8 and v10 support.",
   "repository": "https://github.com/lumine-code/linter-eslint",
   "bugs": {
     "url": "https://github.com/lumine-code/linter-eslint/issues"

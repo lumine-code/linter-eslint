@@ -1,6 +1,8 @@
 # linter-eslint
 
-ESLint linter provider with bundled v8 and v10 support. Uses project-installed ESLint when available, falls back to bundled version.
+ESLint linter provider with bundled v8 and v10 support.
+
+Uses project-installed ESLint when available, falls back to bundled version.
 
 ## Features
 
