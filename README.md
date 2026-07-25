@@ -98,9 +98,9 @@ module.exports = [
 
 ## Services
 
-- **linter** (`2.0.0`): provided to the linter package; exposes the ESLint file linter with its name, grammar scopes and `lint` function.
-- **linter-indie** (`2.0.0`): consumed to report project-wide scan results through an indie linter delegate.
-- **atom-ide-busy-signal** (`0.1.0`): consumed to show busy messages while ESLint engines load and project scans run.
+- **linter** (`1.0.0`): provided to the linter package; exposes the ESLint file linter with its name, grammar scopes and `lint` function.
+- **linter-indie** (`^1.0.0`): consumed to report project-wide scan results through an indie linter delegate.
+- **atom-ide-busy-signal** (`^1.0.0`): consumed to show busy messages while ESLint engines load and project scans run.
 - **tree-view** (`^1.0.0`): consumed to resolve the selected files or folders for `linter-eslint:lint-selected`.
 
 ## Contributing
