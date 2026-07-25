@@ -8,8 +8,11 @@
   },
   "keywords": [
     "javascript",
-    "linter",
-    "eslint"
+    "typescript",
+    "jsx",
+    "tsx",
+    "static-analysis",
+    "code-quality"
   ],
   "version": "1.0.0",
   "license": "MIT",
