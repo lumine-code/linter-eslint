@@ -85,7 +85,7 @@
   "dependencies": {
     "eslint8": "npm:eslint@^8.57.0",
     "eslint10": "npm:eslint@^10.8.0",
-    "minimatch": "^10.2.5"
+    "picomatch": "^4.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
