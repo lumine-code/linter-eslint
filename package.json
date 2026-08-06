@@ -88,8 +88,8 @@
     }
   },
   "dependencies": {
-    "eslint8": "npm:eslint@^8.57.0",
     "eslint10": "npm:eslint@^10.8.0",
+    "eslint8": "npm:eslint@^8.57.1",
     "picomatch": "^4.0.5"
   },
   "devDependencies": {
@@ -97,7 +97,7 @@
     "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-n": "^18.2.2",
-    "globals": "^17.7.0",
+    "globals": "^17.9.0",
     "prettier": "^3.9.6"
   }
 }
