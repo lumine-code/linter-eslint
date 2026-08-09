@@ -6,14 +6,14 @@ describe("linter-eslint", () => {
   let mainModule, workspaceElement;
 
   beforeEach(async () => {
-    workspaceElement = atom.views.getView(atom.workspace);
+    workspaceElement = lumine.views.getView(lumine.workspace);
     jasmine.attachToDOM(workspaceElement);
 
-    atom.project.setPaths([PROJECT_DIR]);
+    lumine.project.setPaths([PROJECT_DIR]);
 
     // The package defers activation until one of its commands is dispatched.
-    const activation = atom.packages.activatePackage("linter-eslint");
-    atom.commands.dispatch(workspaceElement, "linter-eslint:lint-projects");
+    const activation = lumine.packages.activatePackage("linter-eslint");
+    lumine.commands.dispatch(workspaceElement, "linter-eslint:lint-projects");
     mainModule = (await activation).mainModule;
   });
 
@@ -36,7 +36,7 @@ describe("linter-eslint", () => {
 
   describe("lint()", () => {
     it("lints a fixture with the bundled ESLint via the worker", async () => {
-      const editor = await atom.workspace.open(path.join(PROJECT_DIR, "sample.js"));
+      const editor = await lumine.workspace.open(path.join(PROJECT_DIR, "sample.js"));
       const provider = mainModule.provideLinter();
 
       const messages = await provider.lint(editor);
@@ -52,7 +52,7 @@ describe("linter-eslint", () => {
     }, 60000);
 
     it("returns an empty list for files outside any project", async () => {
-      const editor = await atom.workspace.open(path.join(atom.getConfigDirPath(), "loose.js"));
+      const editor = await lumine.workspace.open(path.join(lumine.getConfigDirPath(), "loose.js"));
       const messages = await mainModule.provideLinter().lint(editor);
       expect(messages).toEqual([]);
     });

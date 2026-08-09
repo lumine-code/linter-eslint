@@ -36,7 +36,7 @@
     "language-typescript:grammar-used"
   ],
   "activationCommands": {
-    "atom-workspace": [
+    "lumine-workspace": [
       "linter-eslint:reload",
       "linter-eslint:lint-projects",
       "linter-eslint:lint-selected"

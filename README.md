@@ -21,7 +21,7 @@ To install `linter-eslint` search for _linter-eslint_ in the Install pane of the
 
 ## Commands
 
-Commands available in `atom-workspace`:
+Commands available in `lumine-workspace`:
 
 - `linter-eslint:reload`: reset the ESLint engine cache and re-detect,
 - `linter-eslint:lint-projects`: lint all files in the project,
