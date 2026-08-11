@@ -56,6 +56,66 @@ describe("linter-eslint", () => {
       const messages = await mainModule.provideLinter().lint(editor);
       expect(messages).toEqual([]);
     });
+
+    it("yields open-file diagnostics while ide-eslint serves the editor", async () => {
+      const editor = await lumine.workspace.open(path.join(PROJECT_DIR, "sample.js"));
+      const registration = mainModule.consumeIdeClient({
+        adaptersForEditor(candidate) {
+          return candidate === editor ? [{ id: "ide-eslint" }] : [];
+        },
+      });
+
+      expect(await mainModule.provideLinter().lint(editor)).toEqual([]);
+      registration.dispose();
+      expect((await mainModule.provideLinter().lint(editor)).length).toBe(1);
+    }, 60000);
+
+    it("keeps linting when another language-server adapter serves the editor", async () => {
+      const editor = await lumine.workspace.open(path.join(PROJECT_DIR, "sample.js"));
+      const registration = mainModule.consumeIdeClient({
+        adaptersForEditor: () => [{ id: "ide-typescript" }],
+      });
+
+      expect((await mainModule.provideLinter().lint(editor)).length).toBe(1);
+      registration.dispose();
+    }, 60000);
+
+    it("keeps linting when ide-eslint diagnostics are disabled", async () => {
+      const editor = await lumine.workspace.open(path.join(PROJECT_DIR, "sample.js"));
+      lumine.config.set("ide-eslint.features.diagnostics", false);
+      const registration = mainModule.consumeIdeClient({
+        adaptersForEditor: () => [{ id: "ide-eslint" }],
+      });
+
+      expect((await mainModule.provideLinter().lint(editor)).length).toBe(1);
+      registration.dispose();
+      lumine.config.set("ide-eslint.features.diagnostics", true);
+    }, 60000);
+
+    it("requests another lint when adapter or diagnostics ownership changes", () => {
+      let adaptersChanged;
+      let featuresChanged;
+      const registration = mainModule.consumeIdeClient({
+        adaptersForEditor: () => [],
+        onDidChangeAdapters(callback) {
+          adaptersChanged = callback;
+          return { dispose() {} };
+        },
+        onDidChangeFeatures(callback) {
+          featuresChanged = callback;
+          return { dispose() {} };
+        },
+      });
+      const lints = [];
+      const command = lumine.commands.add(workspaceElement, "linter:lint", () => lints.push(true));
+
+      adaptersChanged({ adapter: { id: "ide-eslint" }, registered: true });
+      featuresChanged({ adapter: { id: "ide-typescript" } });
+      featuresChanged({ adapter: { id: "ide-eslint" } });
+      expect(lints).toEqual([true, true]);
+      command.dispose();
+      registration.dispose();
+    });
   });
 
   describe("message conversion", () => {

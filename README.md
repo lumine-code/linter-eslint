@@ -14,6 +14,7 @@ Uses project-installed ESLint when available, falls back to bundled version.
 - **Precise highlighting**: token-level range highlighting for lint messages.
 - **Auto-fix**: supports fix suggestions from ESLint rules.
 - **Project scans**: lints whole projects or tree-view selections in a background task and reports results through the indie linter API.
+- **IDE adapter coordination**: yields open-file diagnostics when `ide-eslint` diagnostics are enabled, avoiding duplicates while retaining project scans; disabling them hands files back immediately.
 
 ## Installation
 
@@ -102,6 +103,7 @@ module.exports = [
 
 - **linter.provider** (`1.0.0`): provided to the linter package; exposes the ESLint file linter with its name, grammar scopes and `lint` function.
 - **linter.registry** (`^1.0.0`): consumed to report project-wide scan results through an indie linter delegate.
+- **ide-client** (`^1.0.0`): consumed to avoid duplicating diagnostics supplied by the `ide-eslint` adapter.
 - **busy-signal** (`^1.0.0`): consumed to show busy messages while ESLint engines load and project scans run.
 - **tree-view.selection** (`^1.0.0`): consumed to resolve the selected files or folders for `linter-eslint:lint-selected`.
 
