@@ -18,7 +18,7 @@ Uses project-installed ESLint when available, falls back to bundled version.
 
 ## Installation
 
-To install `linter-eslint` search for _linter-eslint_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/linter-eslint`.
+To install `linter-eslint` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/linter-eslint`.
 
 ## Commands
 
@@ -101,11 +101,11 @@ module.exports = [
 
 ## Services
 
-- **linter.provider** (`1.0.0`): provided to the linter package; exposes the ESLint file linter with its name, grammar scopes and `lint` function.
-- **linter.registry** (`^1.0.0`): consumed to report project-wide scan results through an indie linter delegate.
-- **ide-client** (`^1.0.0`): consumed to avoid duplicating diagnostics supplied by the `ide-eslint` adapter.
-- **busy-signal** (`^1.0.0`): consumed to show busy messages while ESLint engines load and project scans run.
-- **tree-view.selection** (`^1.0.0`): consumed to resolve the selected files or folders for `linter-eslint:lint-selected`.
+- `linter.provider`: provided to the linter package; exposes the ESLint file linter with its name, grammar scopes and `lint` function.
+- `linter.registry`: consumed to report project-wide scan results through an indie linter delegate.
+- `ide-client`: consumed to avoid duplicating diagnostics supplied by the `ide-eslint` adapter.
+- `busy-signal`: consumed to show busy messages while ESLint engines load and project scans run.
+- `tree-view.selection`: consumed to resolve the selected files or folders for `linter-eslint:lint-selected`.
 
 ## Contributing
 
