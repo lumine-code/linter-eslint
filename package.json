@@ -31,17 +31,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
-  "activationHooks": [
-    "language-javascript:grammar-used",
-    "language-typescript:grammar-used"
-  ],
-  "activationCommands": {
-    "lumine-workspace": [
-      "linter-eslint:reload",
-      "linter-eslint:lint-projects",
-      "linter-eslint:lint-selected"
-    ]
-  },
   "consumedServices": {
     "linter.registry": {
       "versions": {

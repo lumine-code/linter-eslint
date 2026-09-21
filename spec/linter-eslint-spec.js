@@ -34,6 +34,25 @@ describe("linter-eslint", () => {
     });
   });
 
+  describe("service lifecycle", () => {
+    it("disposes the indie delegate when linter.registry disappears", () => {
+      const delegate = { dispose: jasmine.createSpy("dispose") };
+      const registration = mainModule.consumeLinterRegistry(() => delegate);
+
+      registration.dispose();
+      expect(delegate.dispose).toHaveBeenCalled();
+      expect(require("../lib/indie").indieDelegate).toBeNull();
+    });
+
+    it("forgets busy-signal when its edge disappears", () => {
+      const signal = { create() {} };
+      const registration = mainModule.consumeBusySignal(signal);
+
+      registration.dispose();
+      expect(require("../lib/indie").busySignal).toBeNull();
+    });
+  });
+
   describe("lint()", () => {
     it("lints a fixture with the bundled ESLint via the worker", async () => {
       const editor = await lumine.workspace.open(path.join(PROJECT_DIR, "sample.js"));
