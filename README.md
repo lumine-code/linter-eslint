@@ -30,7 +30,7 @@ lumine --install lumine-code/linter
 
 Use `ide-eslint:lint-projects` and `ide-eslint:lint-selected` for project and tree-view scans. Install `intentions` for rule fixes and `code-format` to apply ESLint fixes during formatting or on save. Use `ide-client:restart` to restart the active document's language servers.
 
-The adapter keeps project ESLint and plugins authoritative, with bundled ESLint v8 for legacy configuration and v10 for flat configuration when no user-installed engine is available. Configuration Mode defaults to automatic detection; choose Flat or Legacy when the project requires it. Settings under `linter-eslint` are no longer read. Projects using TypeScript, React, or other plugins still need those plugins installed locally.
+The adapter keeps project ESLint and plugins authoritative, with bundled ESLint v8 for legacy configuration and v10 for flat configuration when no user-installed engine is available. Configuration Format defaults to automatic detection; choose Flat or Legacy when the project requires it. Settings under `linter-eslint` are no longer read. Projects using TypeScript, React, or other plugins still need those plugins installed locally.
 
 ## Commands
 
