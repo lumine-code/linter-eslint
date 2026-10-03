@@ -2,6 +2,9 @@
 
 ESLint linter provider with bundled v8 and v10 support.
 
+> [!WARNING]
+> **This package is deprecated.** ESLint diagnostics, fixes, and project scans are now provided by [ide-eslint](https://github.com/lumine-code/ide-eslint) through [ide-client](https://github.com/lumine-code/ide-client) and [linter](https://github.com/lumine-code/linter). This repository is archived and no longer maintained.
+
 Uses project-installed ESLint when available, falls back to bundled version.
 
 ## Features
@@ -14,11 +17,20 @@ Uses project-installed ESLint when available, falls back to bundled version.
 - **Precise highlighting**: token-level range highlighting for lint messages.
 - **Auto-fix**: supports fix suggestions from ESLint rules.
 - **Project scans**: lints whole projects or tree-view selections in a background task and reports results through the indie linter API.
-- **IDE adapter coordination**: yields open-file diagnostics when `ide-eslint` diagnostics are enabled, avoiding duplicates while retaining project scans; disabling them hands files back immediately.
 
-## Installation
+## Migration
 
-To install `linter-eslint` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/linter-eslint`.
+Disable or uninstall `linter-eslint` and install `ide-eslint` with `ide-client`. Keep `linter` installed to display diagnostics and `linter-panel` to browse project scan results.
+
+```sh
+lumine --install lumine-code/ide-client
+lumine --install lumine-code/ide-eslint
+lumine --install lumine-code/linter
+```
+
+Use `ide-eslint:lint-projects` and `ide-eslint:lint-selected` for project and tree-view scans. Install `intentions` for rule fixes and `code-format` to apply ESLint fixes during formatting or on save. Use `ide-client:restart` to restart the active document's language servers.
+
+The adapter keeps project ESLint and plugins authoritative, with bundled ESLint v8 for legacy configuration and v10 for flat configuration when no user-installed engine is available. Configuration Mode defaults to automatic detection; choose Flat or Legacy when the project requires it. Settings under `linter-eslint` are no longer read. Projects using TypeScript, React, or other plugins still need those plugins installed locally.
 
 ## Commands
 
